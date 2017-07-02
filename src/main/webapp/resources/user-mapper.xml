@@ -1,0 +1,26 @@
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.vyushkov.testcrud.dao.UserMapper">
+    <resultMap id="userResultMap" type="org.vyushkov.testcrud.model.User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <select id="getUserById" parameterType="java.lang.Integer" resultMap="userResultMap">
+        select * from users where id = #{id}
+    </select>
+
+    <select id="listUsers" resultMap="userResultMap">
+        select * from users
+    </select>
+
+    <update id="updateUser" parameterType="org.vyushkov.testcrud.model.User">
+        update users set name = #{name}, lastname = #{lastName}, age = #{age}, sex = #{sex} where id = #{id};
+    </update>
+
+    <delete id="removeUser" parameterType="java.lang.Integer">
+        delete from users where id = #{id};
+    </delete>
+
+    <insert id="addUser" parameterType="org.vyushkov.testcrud.model.User">
+        insert into users (name, lastName, age, sex) values (#{name}, #{lastName}, #{age}, #{sex});
+    </insert>
+</mapper>
